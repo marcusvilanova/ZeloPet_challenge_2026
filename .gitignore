@@ -1,0 +1,20 @@
+## .NET
+bin/
+obj/
+out/
+
+## Logs (Serilog)
+logs/
+
+## Visual Studio / Rider
+.vs/
+.idea/
+*.user
+*.suo
+
+## OS
+.DS_Store
+Thumbs.db
+
+## Test results
+TestResults/

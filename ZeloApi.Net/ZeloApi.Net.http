@@ -1,0 +1,46 @@
+@ZeloApi.Net_HostAddress = http://localhost:5171
+
+GET {{ZeloApi.Net_HostAddress}}/health
+Accept: application/json
+
+###
+
+GET {{ZeloApi.Net_HostAddress}}/health/live
+Accept: application/json
+
+###
+
+GET {{ZeloApi.Net_HostAddress}}/health/ready
+Accept: application/json
+
+###
+
+POST {{ZeloApi.Net_HostAddress}}/api/tutores
+Content-Type: application/json
+
+{
+  "nome": "Maria Tutora",
+  "email": "maria@zelo.com",
+  "senha": "senhaSegura123",
+  "telefone": "11999998888",
+  "cidade": "São Paulo",
+  "estado": "SP"
+}
+
+###
+
+POST {{ZeloApi.Net_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "maria@zelo.com",
+  "senha": "senhaSegura123"
+}
+
+###
+
+GET {{ZeloApi.Net_HostAddress}}/api/tutores
+Accept: application/json
+Authorization: Bearer {{token}}
+
+###
