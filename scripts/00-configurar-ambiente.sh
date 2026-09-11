@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Configuracoes nao sensiveis. Os nomes seguem o RM do representante.
 export RM="563489"
-export LOCATION="eastus"
+export LOCATION="canadacentral"
 export RESOURCE_GROUP="rg-zelo-rm${RM}"
 export ACR_NAME="zeloacr${RM}"
 export STORAGE_ACCOUNT="zelodata${RM}"
