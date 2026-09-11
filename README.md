@@ -46,10 +46,6 @@ Esse repositório é só a parte de **Java Advanced** (Sprint 3, entrega 12/09) 
 
 ### Opção 1 — perfil `oracle` (padrão, banco Oracle real do time de Banco de Dados)
 
-Troquei o perfil padrão de `dev` pra `oracle` porque conversei com o professor e ele confirmou que o certo é a aplicação persistir de verdade no Oracle da FIAP, não só em memória. Então hoje, rodando sem especificar nada, já tenta conectar direto na instância real.
-
-Pré-requisito: o time de Banco de Dados já precisa ter rodado o `zelo_criar.sql` deles no schema (ver seção mais abaixo sobre a ordem certa). As credenciais nunca ficam no `application.yml` (o repo é público), tem duas formas de passar:
-
 - **Variáveis de ambiente**: `ORACLE_USER` e `ORACLE_PASSWORD` antes de rodar (no terminal, ou em Run/Debug Configurations → Environment variables no IntelliJ). `ORACLE_URL` já vem com um padrão apontando pro `oracle.fiap.com.br:1521:ORCL`.
 - **Arquivo local `src/main/resources/application-oracle.yml`**: só com `spring.datasource.username`/`password`, o Spring Boot carrega ele sozinho quando o perfil `oracle` tá ativo. Esse arquivo tá no `.gitignore`, nunca vai pro GitHub — em outra máquina ele simplesmente não existe e cai nos valores de exemplo até alguém criar o seu.
 
@@ -148,9 +144,7 @@ As credenciais do Oracle vêm por variável de ambiente (`ORACLE_URL`/`ORACLE_US
 
 ---
 
-## Decisões que tomei durante o desenvolvimento
-
-Fui anotando o motivo de cada decisão pra não esquecer na hora de defender na banca:
+## Decisões tomadas durante o desenvolvimento
 
 1. **Três perfis (TUTOR/VETERINARIO/GESTOR)** — vêm direto do `CHECK` da coluna `tp_usuario` no DDL do time de banco, pra não ter divergência entre o schema deles e a aplicação.
 2. **Tabela extra `T_CH_CLINICA_EQUIPE`** — não existe no `zelo_criar.sql` deles, mas precisava pra vincular VETERINARIO/GESTOR a uma clínica (N:N). Como nenhuma FK deles aponta pra ela, criei ela separada tanto no schema de dev/test quanto no Oracle real, sem interferir no que já existe.
@@ -173,26 +167,6 @@ Fui anotando o motivo de cada decisão pra não esquecer na hora de defender na 
 | Spring Security, 2+ perfis, proteção de rotas (30 pts) | `SecurityConfig` — TUTOR/VETERINARIO/GESTOR, rotas por prefixo, login com redirect por perfil, CSRF, BCrypt |
 | 2 fluxos completos além de CRUD, com validação (20 pts) | Triagem/Encaminhamento + Alertas/Plano de Cuidado, Bean Validation nos DTOs |
 | Qualidade de código | Camadas separadas (controller/service/repository/DTO), exceções de domínio próprias, sem código morto |
-
----
-
-## Problemas que apareceram no caminho
-
-Alguns bugs e ajustes que fui encontrando enquanto desenvolvia e testava, deixando registrado porque foi trabalho de verdade resolver isso e pode cair pergunta na arguição:
-
-- **Builder do Lombok ignorando valor padrão**: `Usuario.ativo` tinha `= "S"` direto no campo, mas sem `@Builder.Default` o builder do Lombok ignora esse valor e cria o objeto com `null`. Corrigi adicionando a anotação.
-- **Colunas de timestamp com `nullable = false`**: como `criado_em` é preenchido pelo próprio banco (`DEFAULT CURRENT_TIMESTAMP`) e nunca pelo Java, deixar `nullable = false` no lado do Hibernate podia estourar validação antes do insert. Tirei essa restrição do lado Java.
-- **JPQL comparando enum com string dentro de `CASE WHEN`**: funcionava, mas não é bem portável. Troquei pra só filtrar/ordenar por data na query, e a priorização por urgência ficou num `Comparator` em Java mesmo, mais fácil de testar.
-- **Import faltando** no `ClinicaGerenciarController` (`@RequestMapping` sem import).
-- **Consulta N+1**: adicionei `join fetch` nas queries que alimentam telas de lista, pra não fazer uma query por linha.
-- **Tipo `NUMBER` sem precisão dando erro no Hibernate**: rodando pela primeira vez fora do ambiente de teste, o Hibernate recusou subir reclamando de tipo de coluna (esperava BIGINT, achava NUMERIC). É uma limitação conhecida de Oracle + Hibernate — Oracle não tem BIGINT nativo, então qualquer NUMBER sempre aparece como NUMERIC pro driver. Resolvi de vez trocando `ddl-auto` de `validate` pra `none` nos três perfis — o Flyway continua sendo o dono do schema, só o Hibernate parou de tentar validar um tipo que o Oracle não consegue reportar do jeito que ele espera.
-- **Remapeamento inteiro do schema** quando chegou o DDL real do Nicolas: os nomes de tabela/coluna são bem diferentes do que eu tinha suposto antes (`T_CH_USUARIO` em vez de `zelo_usuario`, colunas com prefixo `nm_`/`ds_`/`tp_` etc), e alguns enums tiveram que ser ajustados pra bater com os `CHECK` constraints reais (ex: `Especie` virou `CAO`/`GATO`). Deu trabalho, mas foi só mapeamento — a lógica de negócio não mudou.
-- **Faltava a dependência `flyway-database-oracle`**: ao testar contra o Oracle de verdade pela primeira vez, a conexão funcionou mas o Flyway não reconheceu o banco (`Unsupported Database: Oracle 19.3`) — porque desde a versão 9/10 o suporte a cada banco virou um artefato Maven separado do `flyway-core`. Adicionei a dependência no `pom.xml` e resolveu.
-- **Faltava `baseline-on-migrate`**: resolvido o de cima, apareceu outro erro (`Found non-empty schema... but no schema history table`) porque o schema do Nicolas já vem com tabelas criadas fora do controle do Flyway (pelo script dele). Configurei `baseline-on-migrate: true` e `baseline-version: "0"` no perfil oracle — esse `"0"` é importante porque nossa primeira migration também se chama `V1`, e se deixasse no padrão do Flyway (que é `1`) ele ia achar que já tinha rodado e pulava a criação da `T_CH_CLINICA_EQUIPE` sem avisar nada.
-
-Depois desses dois últimos ajustes rodei a aplicação de novo contra o Oracle da FIAP de verdade e funcionou ponta a ponta: conectou, o Flyway aplicou o baseline e as duas migrations, e a aplicação subiu certinho. Testei inclusive cadastrando um pet, fechando a aplicação e abrindo de novo — o pet continuou lá, confirmando que tá persistindo no banco mesmo, não só em memória.
-
-- **Redesign da tela**: o layout inicial usava só o Bootstrap padrão com a cor da marca por cima, refiz com uma identidade visual própria (paleta verde/coral, tipografia Poppins/Inter, cards com sombra, landing page nova). Só mexi em HTML/CSS, nenhuma lógica ou nome de campo mudou.
 
 ---
 
@@ -235,10 +209,3 @@ src/test/java/...       JUnit 5 + Mockito + AssertJ + Spring Boot Test
 ```
 
 ---
-
-## O que ainda falta antes de entregar
-
-- Subir o repositório no GitHub (público).
-- Confirmar com o Nicolas que a tabela extra e o seed não vão bagunçar nada do lado dele.
-- Gravar o vídeo de demonstração (máx. 10 min).
-- Revisar a seção de "Problemas" e "Decisões" antes da arguição oral individual, porque é ali que costuma cair pergunta de "por que você fez assim?".
