@@ -283,7 +283,7 @@ Os testes utilizam o perfil `test`, com uma instância isolada do H2 e migration
 
 ## Demonstração
 
-Vídeo de apresentação da aplicação: **[adicionar link do vídeo]**
+Vídeo de apresentação da aplicação: **https://youtu.be/PAwVmhodWFg?is=eBH9PygQxJu3k7Rp**
 
 O vídeo apresenta o login com os diferentes perfis, as regras de acesso, o cadastro de pets, o fluxo completo de triagem e o funcionamento do plano de cuidado.
 
