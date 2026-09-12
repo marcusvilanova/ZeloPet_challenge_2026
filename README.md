@@ -133,7 +133,7 @@ O Hibernate está configurado com `ddl-auto: none`. Dessa forma, a estrutura do 
 ### 1. Clonar o repositório
 
 ```bash
-git clone <URL_DO_REPOSITORIO>
+git clone https://github.com/GabrielRobertoni/zelo-java.git
 cd zelo-java-main
 ```
 
