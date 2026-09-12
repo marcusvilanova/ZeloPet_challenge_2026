@@ -1,0 +1,9 @@
+.git
+.github
+target
+.env
+.azure.env
+docs
+scripts
+entrega
+README.md

@@ -1,0 +1,14 @@
+{
+  "info": {"name": "Zelo - CRUD Cloud", "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"},
+  "variable": [{"key": "baseUrl", "value": "http://SUBSTITUA-FQDN:8080"}, {"key": "petId", "value": "3"}, {"key": "cuidadoId", "value": "3"}],
+  "item": [
+    {"name":"Pets - GET","request":{"method":"GET","url":"{{baseUrl}}/api/pets"}},
+    {"name":"Pets - POST","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"nome\": \"Mel\",\n  \"especie\": \"Cao\",\n  \"raca\": \"Beagle\",\n  \"dataNascimento\": \"2023-04-12\",\n  \"nomeTutor\": \"Carla Souza\"\n}"},"url":"{{baseUrl}}/api/pets"}},
+    {"name":"Pets - PUT","request":{"method":"PUT","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"nome\": \"Mel\",\n  \"especie\": \"Cao\",\n  \"raca\": \"Beagle\",\n  \"dataNascimento\": \"2023-04-12\",\n  \"nomeTutor\": \"Carla Souza Ferreira\"\n}"},"url":"{{baseUrl}}/api/pets/{{petId}}"}},
+    {"name":"Pets - DELETE","request":{"method":"DELETE","url":"{{baseUrl}}/api/pets/{{petId}}"}},
+    {"name":"Cuidados - GET","request":{"method":"GET","url":"{{baseUrl}}/api/cuidados"}},
+    {"name":"Cuidados - POST","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"petId\": {{petId}},\n  \"tipo\": \"EXAME\",\n  \"descricao\": \"Hemograma preventivo anual\",\n  \"dataPrevista\": \"2026-11-05\",\n  \"status\": \"PENDENTE\"\n}"},"url":"{{baseUrl}}/api/cuidados"}},
+    {"name":"Cuidados - PUT","request":{"method":"PUT","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"petId\": {{petId}},\n  \"tipo\": \"EXAME\",\n  \"descricao\": \"Hemograma preventivo realizado\",\n  \"dataPrevista\": \"2026-11-05\",\n  \"status\": \"CONCLUIDO\"\n}"},"url":"{{baseUrl}}/api/cuidados/{{cuidadoId}}"}},
+    {"name":"Cuidados - DELETE","request":{"method":"DELETE","url":"{{baseUrl}}/api/cuidados/{{cuidadoId}}"}}
+  ]
+}
