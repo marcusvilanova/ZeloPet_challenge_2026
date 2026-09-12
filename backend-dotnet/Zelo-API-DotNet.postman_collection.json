@@ -1,0 +1,324 @@
+{
+"info": {
+"_postman_id": "a1b2c3d4-e5f6-7890-1234-56789abcdef0",
+"name": "Zelo API .NET",
+"description": "Coleção de testes para a API .NET do Projeto Zelo",
+"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+},
+"variable": [
+{
+"key": "baseUrl",
+"value": "http://localhost:5000"
+},
+{
+"key": "token",
+"value": ""
+}
+],
+"item": [
+{
+"name": "Health",
+"item": [
+{
+"name": "Health Geral",
+"request": {
+"method": "GET",
+"header": [],
+"url": {
+"raw": "{{baseUrl}}/health",
+"host": [ "{{baseUrl}}" ],
+"path": [ "health" ]
+}
+},
+"response": []
+},
+{
+"name": "Health Live",
+"request": {
+"method": "GET",
+"header": [],
+"url": {
+"raw": "{{baseUrl}}/health/live",
+"host": [ "{{baseUrl}}" ],
+"path": [ "health", "live" ]
+}
+},
+"response": []
+},
+{
+"name": "Health Ready",
+"request": {
+"method": "GET",
+"header": [],
+"url": {
+"raw": "{{baseUrl}}/health/ready",
+"host": [ "{{baseUrl}}" ],
+"path": [ "health", "ready" ]
+}
+},
+"response": []
+},
+{
+"name": "Métricas (Prometheus)",
+"request": {
+"method": "GET",
+"header": [],
+"url": {
+"raw": "{{baseUrl}}/metrics",
+"host": [ "{{baseUrl}}" ],
+"path": [ "metrics" ]
+}
+},
+"response": []
+}
+]
+},
+{
+"name": "Auth",
+"item": [
+{
+"name": "Login",
+"request": {
+"method": "POST",
+"header": [
+{ "key": "Content-Type", "value": "application/json" }
+],
+"body": {
+"mode": "raw",
+"raw": "{\n  \"email\": \"joao@email.com\",\n  \"senha\": \"senhaSegura123\"\n}"
+},
+"url": {
+"raw": "{{baseUrl}}/api/auth/login",
+"host": [ "{{baseUrl}}" ],
+"path": [ "api", "auth", "login" ]
+}
+},
+"response": []
+}
+]
+},
+{
+"name": "Tutores",
+"item": [
+{
+"name": "Listar Tutores (com paginação)",
+"request": {
+"method": "GET",
+"header": [
+{ "key": "Authorization", "value": "Bearer {{token}}" }
+],
+"url": {
+"raw": "{{baseUrl}}/api/Tutores?page=1&size=10",
+"host": [ "{{baseUrl}}" ],
+"path": [ "api", "Tutores" ],
+"query": [
+{ "key": "page", "value": "1" },
+{ "key": "size", "value": "10" }
+]
+}
+},
+"response": []
+},
+{
+"name": "Buscar Tutor por Nome",
+"request": {
+"method": "GET",
+"header": [
+{ "key": "Authorization", "value": "Bearer {{token}}" }
+],
+"url": {
+"raw": "{{baseUrl}}/api/Tutores?nome=João",
+"host": [ "{{baseUrl}}" ],
+"path": [ "api", "Tutores" ],
+"query": [
+{ "key": "nome", "value": "João" }
+]
+}
+},
+"response": []
+},
+{
+"name": "Criar Tutor",
+"request": {
+"method": "POST",
+"header": [
+{ "key": "Content-Type", "value": "application/json" }
+],
+"body": {
+"mode": "raw",
+"raw": "{\n  \"nome\": \"João Silva\",\n  \"email\": \"joao@email.com\",\n  \"senha\": \"senhaSegura123\",\n  \"telefone\": \"11999999999\",\n  \"cidade\": \"São Paulo\",\n  \"estado\": \"SP\"\n}"
+},
+"url": {
+"raw": "{{baseUrl}}/api/Tutores",
+"host": [ "{{baseUrl}}" ],
+"path": [ "api", "Tutores" ]
+}
+},
+"response": []
+},
+{
+"name": "Buscar Tutor por ID",
+"request": {
+"method": "GET",
+"header": [
+{ "key": "Authorization", "value": "Bearer {{token}}" }
+],
+"url": {
+"raw": "{{baseUrl}}/api/Tutores/1",
+"host": [ "{{baseUrl}}" ],
+"path": [ "api", "Tutores", "1" ]
+}
+},
+"response": []
+},
+{
+"name": "Atualizar Tutor",
+"request": {
+"method": "PUT",
+"header": [
+{ "key": "Content-Type", "value": "application/json" },
+{ "key": "Authorization", "value": "Bearer {{token}}" }
+],
+"body": {
+"mode": "raw",
+"raw": "{\n  \"nome\": \"João Silva Atualizado\",\n  \"telefone\": \"11999999999\",\n  \"cidade\": \"São Paulo\",\n  \"estado\": \"SP\"\n}"
+},
+"url": {
+"raw": "{{baseUrl}}/api/Tutores/1",
+"host": [ "{{baseUrl}}" ],
+"path": [ "api", "Tutores", "1" ]
+}
+},
+"response": []
+},
+{
+"name": "Deletar Tutor",
+"request": {
+"method": "DELETE",
+"header": [
+{ "key": "Authorization", "value": "Bearer {{token}}" }
+],
+"url": {
+"raw": "{{baseUrl}}/api/Tutores/1",
+"host": [ "{{baseUrl}}" ],
+"path": [ "api", "Tutores", "1" ]
+}
+},
+"response": []
+}
+]
+},
+{
+"name": "Pets",
+"item": [
+{
+"name": "Listar Pets (com paginação)",
+"request": {
+"method": "GET",
+"header": [
+{ "key": "Authorization", "value": "Bearer {{token}}" }
+],
+"url": {
+"raw": "{{baseUrl}}/api/Pets?page=1&size=10",
+"host": [ "{{baseUrl}}" ],
+"path": [ "api", "Pets" ],
+"query": [
+{ "key": "page", "value": "1" },
+{ "key": "size", "value": "10" }
+]
+}
+},
+"response": []
+},
+{
+"name": "Buscar Pet por Espécie",
+"request": {
+"method": "GET",
+"header": [
+{ "key": "Authorization", "value": "Bearer {{token}}" }
+],
+"url": {
+"raw": "{{baseUrl}}/api/Pets?especie=Cachorro",
+"host": [ "{{baseUrl}}" ],
+"path": [ "api", "Pets" ],
+"query": [
+{ "key": "especie", "value": "Cachorro" }
+]
+}
+},
+"response": []
+},
+{
+"name": "Criar Pet",
+"request": {
+"method": "POST",
+"header": [
+{ "key": "Content-Type", "value": "application/json" },
+{ "key": "Authorization", "value": "Bearer {{token}}" }
+],
+"body": {
+"mode": "raw",
+"raw": "{\n  \"nome\": \"Rex\",\n  \"especie\": \"Cachorro\",\n  \"raca\": \"Labrador\",\n  \"sexo\": \"M\",\n  \"pesoKg\": 25.5,\n  \"tutorId\": 1\n}"
+},
+"url": {
+"raw": "{{baseUrl}}/api/Pets",
+"host": [ "{{baseUrl}}" ],
+"path": [ "api", "Pets" ]
+}
+},
+"response": []
+},
+{
+"name": "Buscar Pet por ID",
+"request": {
+"method": "GET",
+"header": [
+{ "key": "Authorization", "value": "Bearer {{token}}" }
+],
+"url": {
+"raw": "{{baseUrl}}/api/Pets/1",
+"host": [ "{{baseUrl}}" ],
+"path": [ "api", "Pets", "1" ]
+}
+},
+"response": []
+},
+{
+"name": "Atualizar Pet",
+"request": {
+"method": "PUT",
+"header": [
+{ "key": "Content-Type", "value": "application/json" },
+{ "key": "Authorization", "value": "Bearer {{token}}" }
+],
+"body": {
+"mode": "raw",
+"raw": "{\n  \"nome\": \"Rex Atualizado\",\n  \"especie\": \"Cachorro\",\n  \"raca\": \"Labrador\",\n  \"sexo\": \"M\",\n  \"pesoKg\": 26.0\n}"
+},
+"url": {
+"raw": "{{baseUrl}}/api/Pets/1",
+"host": [ "{{baseUrl}}" ],
+"path": [ "api", "Pets", "1" ]
+}
+},
+"response": []
+},
+{
+"name": "Deletar Pet",
+"request": {
+"method": "DELETE",
+"header": [
+{ "key": "Authorization", "value": "Bearer {{token}}" }
+],
+"url": {
+"raw": "{{baseUrl}}/api/Pets/1",
+"host": [ "{{baseUrl}}" ],
+"path": [ "api", "Pets", "1" ]
+}
+},
+"response": []
+}
+]
+}
+]
+}
