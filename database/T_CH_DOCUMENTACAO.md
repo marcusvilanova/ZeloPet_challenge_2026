@@ -4,9 +4,12 @@
 
 **Documento técnico da 3.ª Sprint**
 
-**Integrantes:** preencher com os nomes completos em ordem alfabética.
-
-**RMs:** preencher os RMs correspondentes.
+**Integrantes (ordem alfabética) e RMs:**
+- Bruno Ferreira — RM 563489
+- Gabriel Robertoni Padilha — RM 566293
+- Hebert Lopes do Santos — RM 563192
+- Marcus Vinícius Vila Nova da Silva — RM 558771
+- Nicolas Monteiro Ramiro — RM 562380
 
 > Este documento foi preparado para acompanhar o arquivo `T_CH_CHALLENGE_COMPLETO.sql`. O script contém a estrutura, a carga de dados, os objetos PL/SQL, os testes de exceção e a auditoria DML.
 
