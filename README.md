@@ -134,7 +134,7 @@ O Hibernate está configurado com `ddl-auto: none`. Dessa forma, a estrutura do 
 
 ```bash
 git clone https://github.com/GabrielRobertoni/zelo-java.git
-cd zelo-java-main
+cd zelo-java
 ```
 
 ### 2. Executar localmente com H2
@@ -281,7 +281,7 @@ Os testes utilizam o perfil `test`, com uma instância isolada do H2 e migration
 
 ## Demonstração
 
-Vídeo de apresentação da aplicação: **https://youtu.be/PAwVmhodWFg?is=eBH9PygQxJu3k7Rp**
+Vídeo de apresentação da aplicação: [Assistir à demonstração do Zelo](https://youtu.be/PAwVmhodWFg)
 
 O vídeo apresenta o login com os diferentes perfis, as regras de acesso, o cadastro de pets, o fluxo completo de triagem e o funcionamento do plano de cuidado.
 
