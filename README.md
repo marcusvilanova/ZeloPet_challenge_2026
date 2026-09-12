@@ -77,10 +77,11 @@ Um alerta pode passar pelos estados:
 
 ```text
 PENDENTE → ENVIADO → CONCLUIDO
+PENDENTE → CONCLUIDO
 PENDENTE ou ENVIADO → CANCELADO
 ```
 
-Lembretes pessoais também podem ser concluídos diretamente pelo tutor. Nos alertas vinculados a uma clínica, a equipe pode registrar o envio da notificação e o tutor confirma posteriormente a realização do cuidado.
+O tutor pode confirmar diretamente um cuidado pendente ou enviado. Quando o alerta está vinculado a uma clínica, a equipe também pode registrar o envio da notificação antes da confirmação.
 
 ## Segurança e controle de acesso
 
@@ -105,6 +106,8 @@ O projeto trabalha com dois ambientes:
 
 - `dev`: utiliza H2 em memória e cria todo o schema necessário para executar e demonstrar a aplicação localmente;
 - `oracle`: conecta ao banco Oracle do grupo e aplica apenas as migrations que pertencem à aplicação Java.
+
+O perfil `oracle` está definido como padrão no `application.yml`. Portanto, quando nenhum perfil é informado no comando, a aplicação tenta se conectar diretamente ao Oracle. Para utilizar o H2, o perfil `dev` deve ser indicado explicitamente.
 
 As migrations estão organizadas em:
 
@@ -181,7 +184,13 @@ Depois, execute:
 mvn spring-boot:run -Dspring-boot.run.profiles=oracle
 ```
 
-As credenciais reais não devem ser adicionadas ao repositório. Como alternativa local, elas podem ser configuradas em um arquivo `application-oracle.yml`, que já está incluído no `.gitignore`.
+Como `oracle` é o perfil padrão, o comando abaixo produz o mesmo resultado:
+
+```bash
+mvn spring-boot:run
+```
+
+As credenciais reais não devem ser adicionadas ao repositório. Elas podem ser fornecidas por variáveis de ambiente ou por um arquivo local `application-oracle.yml`, que já está incluído no `.gitignore`.
 
 ### 4. Gerar o arquivo JAR
 
@@ -210,13 +219,13 @@ Os dados recebidos pelas telas são representados por DTOs e validados no backen
 - Limites de caracteres;
 - Formato de e-mail;
 - CNPJ com 14 dígitos;
-- UF com duas letras;
+- UF da clínica com duas letras;
 - Peso maior que zero;
 - Data de nascimento no passado;
 - Data prevista do alerta igual ou posterior à data atual;
 - Relato de triagem entre 10 e 2.000 caracteres.
 
-As mensagens são exibidas nos próprios formulários para orientar a correção dos dados.
+As principais mensagens de validação são exibidas nos próprios formulários para orientar a correção dos dados.
 
 ## Arquitetura do projeto
 
