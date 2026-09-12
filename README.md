@@ -233,9 +233,11 @@ Para evitar cobranças, execute somente depois de concluir todas as gravações 
 
 ## 13. Integrantes
 
-- Bruno Ferreira - RM 563489
-- Gabriel Robertoni Padilha - RM 566293
-- Leonardo Aragaki Rodrigues - RM 562944
+- Hebert Lopes do Santos — RM 563192
+- Nicolas Monteiro Ramiro — RM 562380
+- Marcus Vinícius Vila Nova da Silva — RM 558771
+- Bruno Ferreira — RM 563489
+- Gabriel Robertoni Padilha — RM 566293
 
 ## 14. Checklist da entrega
 
@@ -249,6 +251,6 @@ Para evitar cobranças, execute somente depois de concluir todas as gravações 
 - [x] CRUD completo de `pets` e `cuidados`
 - [x] Dockerfiles, Compose, scripts, coleção Postman e comandos documentados
 - [x] Arquitetura cloud com recursos e responsabilidades
-- [ ] Publicar o código no GitHub e conferir acesso público do professor
-- [ ] Gravar vídeo seguindo `docs/roteiro-video.md` e conferir acesso público
-- [ ] Gerar o PDF final contendo exclusivamente integrantes, link do GitHub e link do YouTube
+- [x] Publicar o código no GitHub e conferir acesso público do professor
+- [x] Gravar vídeo seguindo `docs/roteiro-video.md` e conferir acesso público
+- [x] Gerar o PDF final contendo exclusivamente integrantes, link do GitHub e link do YouTube
