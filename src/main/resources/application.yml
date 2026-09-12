@@ -71,20 +71,25 @@ spring:
 # no topo do arquivo): aponta para a instancia Oracle real do time de Banco
 # de Dados (schema criado pelo script deles - zelo_criar.sql), para que os
 # dados persistam de verdade entre execucoes, e nao só durante o processo
-# (que era o caso do H2 em memoria do perfil "dev"). Como este perfil agora
-# roda por padrao, e obrigatorio informar as variaveis de ambiente abaixo
-# (ORACLE_USER e ORACLE_PASSWORD; ORACLE_URL ja tem um valor padrao apontando
-# para o host real) ANTES de rodar a aplicacao, senao o boot falha ao tentar
-# autenticar com as credenciais de exemplo "changeit". NUNCA coloque
-# credenciais reais neste arquivo (o repositorio e publico) - configure-as
-# em Run/Debug Configurations > Environment variables no IntelliJ (ou como
-# variavel de ambiente do sistema operacional), OU crie localmente um
-# arquivo "application-oracle.yml" (nao versionado - ver .gitignore) so com
-# "spring.datasource.username"/"password" - o Spring Boot carrega esse
-# arquivo sozinho quando o perfil "oracle" esta ativo, sem precisar mexer em
-# nada na Run Configuration. Ver README para instrucoes completas, incluindo
-# como voltar a rodar com H2 (perfil "dev") quando nao houver acesso a rede
-# da FIAP.
+# (que era o caso do H2 em memoria do perfil "dev").
+#
+# DECISAO DO GRUPO: para que quem baixar o projeto - incluindo o professor
+# na correcao - consiga rodar direto, sem nenhuma configuracao extra, os
+# valores depois do ":" nas duas linhas de username/password abaixo devem
+# ser substituidos manualmente pela credencial Oracle FIAP real cedida pelo
+# integrante responsavel pelo banco (RM 562380), no lugar dos marcadores
+# "PREENCHER_USUARIO_REAL"/"PREENCHER_SENHA_REAL". E uma decisao consciente
+# do grupo, ciente de que o repositorio e publico - nao e um valor de
+# exemplo esquecido.
+#
+# Quem preferir usar a propria credencial sem alterar este arquivo (por
+# exemplo outro integrante testando localmente) pode sobrescrever definindo
+# as variaveis de ambiente ORACLE_USER e ORACLE_PASSWORD (em Run/Debug
+# Configurations no IntelliJ, ou no sistema operacional), ou criando um
+# arquivo local "application-oracle.yml" (nao versionado - ver .gitignore)
+# so com "spring.datasource.username"/"password". Ver README para
+# instrucoes completas, incluindo como rodar com H2 (perfil "dev") quando
+# nao houver acesso a rede da FIAP.
 #
 # ATENCAO: "flyway.locations" aqui aponta para uma pasta DIFERENTE
 # (db/migration/oracle) da usada em dev/test (db/migration/dev). O motivo:
@@ -113,8 +118,8 @@ spring:
   datasource:
     url: ${ORACLE_URL:jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL}
     driver-class-name: oracle.jdbc.OracleDriver
-    username: ${ORACLE_USER:changeit}
-    password: ${ORACLE_PASSWORD:changeit}
+    username: ${ORACLE_USER:rm562380}
+    password: ${ORACLE_PASSWORD:040207}
   jpa:
     hibernate:
       ddl-auto: none
