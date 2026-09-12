@@ -50,12 +50,13 @@ docker-compose.yml                validação local antes do envio à nuvem
 
 > Execute os comandos na raiz do repositório. Não crie nem envie um arquivo `.env` com senhas reais ao GitHub.
 
+
 ## 6. Clone obrigatório
 
-O vídeo deve começar clonando um repositório vazio no computador de demonstração:
+O vídeo deve começar clonando o repositório em uma pasta ainda não utilizada:
 
 ```bash
-git clone URL_DO_REPOSITORIO
+git clone https://github.com/brunoferr10/zelo-devops.git
 cd zelo-devops
 ```
 
