@@ -137,8 +137,6 @@ git clone https://github.com/GabrielRobertoni/zelo-java.git
 cd zelo-java-main
 ```
 
-Substitua `<URL_DO_REPOSITORIO>` pelo endereço público deste projeto no GitHub.
-
 ### 2. Executar localmente com H2
 
 Esta é a forma mais simples de testar e demonstrar a aplicação, pois não exige credenciais externas:
